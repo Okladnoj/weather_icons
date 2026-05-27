@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:weather_icons/weather_icons.dart';
 import 'package:weather_icons/src/util/rotate.dart';
+import 'package:weather_icons/weather_icons.dart';
 
-import '../lib/src/util/wi_data.dart';
 import 'util/test_widget.dart';
 
 void main() {
   testWidgets('can create Icon using WeatherIcon data', (t) async {
-    await t.pumpWidget(TestWidget(child: Icon(WeatherIcons.cloud)));
+    await t.pumpWidget(const TestWidget(child: Icon(WeatherIcons.cloud)));
     expect(find.byIcon(WeatherIcons.cloud), findsOneWidget);
   });
 
@@ -29,7 +27,7 @@ void main() {
   });
 
   testWidgets('create a rotated child', (t) async {
-    final child = TestWidget(child: Icon(WeatherIcons.cloud));
+    const child = TestWidget(child: Icon(WeatherIcons.cloud));
     final rotated = Rotate(
       child: child,
       degree: 100,
@@ -41,25 +39,20 @@ void main() {
 
   testWidgets('should set the opacity of the icon color', (tester) async {
     final expected = Colors.amber.withOpacity(0);
-    await tester.pumpWidget(IconTheme(
-      data: IconThemeData(
-        color: Colors.amber,
-        opacity: 0.0,
+    await tester.pumpWidget(
+      const IconTheme(
+        data: IconThemeData(
+          color: Colors.amber,
+          opacity: 0.0,
+        ),
+        child: BoxedIcon(WeatherIcons.day_fog),
       ),
-      child: BoxedIcon(WeatherIcons.day_fog),
-    ));
+    );
 
     final RichText test = tester.firstWidget(find.byType(RichText));
     expect(test, isNotNull);
 
     final span = test.text as TextSpan;
     expect(span.style!.color, expected);
-  });
-
-  test('Creation of a WIData object', () {
-    final data = WIData(42);
-    expect(data.codePoint, 42);
-    expect(data.fontFamily, WIData.FONT_FAMILY);
-    expect(data.fontPackage, WIData.FONT_PACKAGE);
   });
 }

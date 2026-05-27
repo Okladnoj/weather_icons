@@ -9,7 +9,7 @@ class DynamicScreen extends StatefulWidget {
 }
 
 class _DynamicScreenState extends State<DynamicScreen> {
-  String _searchTerm;
+  late String _searchTerm;
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class TimeScreen extends StatefulWidget {
+  const TimeScreen({super.key});
+
   @override
-  _TimeScreenState createState() => _TimeScreenState();
+  State<TimeScreen> createState() => _TimeScreenState();
 }
 
 class _TimeScreenState extends State<TimeScreen> {
@@ -14,18 +16,18 @@ class _TimeScreenState extends State<TimeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Time Icons"),
+        title: const Text('Time Icons'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Press the buttons to change the time",
+            const Text(
+              'Press the buttons to change the time',
               style: TextStyle(fontSize: 18),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 32, bottom: 48),
+              padding: const EdgeInsets.only(top: 32, bottom: 48),
               child: Container(
                 color: Colors.amber,
                 child: BoxedIcon(
@@ -38,7 +40,7 @@ class _TimeScreenState extends State<TimeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  child: Text("-"),
+                  child: const Text('-'),
                   onPressed: () {
                     _updateHour(_hour - 1);
                   },
@@ -47,11 +49,11 @@ class _TimeScreenState extends State<TimeScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 32.0),
                   child: Text(
                     _getHourDisplay(),
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 ElevatedButton(
-                  child: Text("+"),
+                  child: const Text('+'),
                   onPressed: () {
                     _updateHour(_hour + 1);
                   },
@@ -65,16 +67,19 @@ class _TimeScreenState extends State<TimeScreen> {
   }
 
   String _getHourDisplay() {
-    final prefix = _hour >= 12 ? "PM" : "AM";
+    final prefix = _hour >= 12 ? 'PM' : 'AM';
     final hour = _hour > 12 ? _hour - 12 : _hour;
-    return "$hour $prefix";
+    return '$hour $prefix';
   }
 
-  _updateHour(int hour) {
-    if (hour > 23)
-      hour = 0;
-    else if (hour < 0) hour = 23;
+  void _updateHour(int hour) {
+    int hour0 = hour;
+    if (hour0 > 23) {
+      hour0 = 0;
+    } else if (hour0 < 0) {
+      hour0 = 23;
+    }
 
-    setState(() => _hour = hour);
+    setState(() => _hour = hour0);
   }
 }

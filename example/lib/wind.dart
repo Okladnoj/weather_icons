@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 class WindScreen extends StatefulWidget {
+  const WindScreen({super.key});
+
   @override
-  _WindScreenState createState() => _WindScreenState();
+  State<WindScreen> createState() => _WindScreenState();
 }
 
 class _WindScreenState extends State<WindScreen> {
@@ -13,19 +15,19 @@ class _WindScreenState extends State<WindScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Wind Icons"),
+        title: const Text('Wind Icons'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Press the buttons to change wind Direction",
+            const Text(
+              'Press the buttons to change wind Direction',
               style: TextStyle(fontSize: 18),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 32, bottom: 48),
-              child: Container(
+              padding: const EdgeInsets.only(top: 32, bottom: 48),
+              child: ColoredBox(
                 color: Colors.amber,
                 child: WindIcon(
                   degree: _degree,
@@ -37,7 +39,7 @@ class _WindScreenState extends State<WindScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  child: Text("-20"),
+                  child: const Text('-20'),
                   onPressed: () {
                     _updateHour(_degree - 20);
                   },
@@ -45,12 +47,12 @@ class _WindScreenState extends State<WindScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32.0),
                   child: Text(
-                    "$_degree°",
-                    style: TextStyle(fontSize: 18),
+                    '$_degree°',
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 ElevatedButton(
-                  child: Text("+20"),
+                  child: const Text('+20'),
                   onPressed: () {
                     _updateHour(_degree + 20);
                   },
@@ -63,11 +65,14 @@ class _WindScreenState extends State<WindScreen> {
     );
   }
 
-  _updateHour(double degree) {
-    if (degree > 360)
-      degree = 0;
-    else if (degree < 0) degree = 360;
+  void _updateHour(double degree) {
+    double degree0 = degree;
+    if (degree0 > 360) {
+      degree0 = 0;
+    } else if (degree0 < 0) {
+      degree0 = 360;
+    }
 
-    setState(() => _degree = degree);
+    setState(() => _degree = degree0);
   }
 }

@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-
 class WIData {
   static const String FONT_FAMILY = 'WeatherIcons';
   static const String FONT_PACKAGE = 'weather_icons';
 
-  const WIData(int value);
+  const WIData();
 }
